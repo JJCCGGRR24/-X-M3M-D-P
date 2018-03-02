@@ -99,12 +99,14 @@ public class ManagerNulpController {
 				this.tripService.save(nulp.getTrip());
 				result = new ModelAndView("redirect:/nulp/manager/list.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(nulp, "nulp.commit.error");
-
+				if (oops.getMessage().equals("moment can't be past"))
+					result = this.createEditModelAndView(nulp, "nulp.moment.error");
+				else
+					result = this.createEditModelAndView(nulp, "nulp.commit.error");
+				return result;
 			}
 		return result;
 	}
-
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Nulp nulp, final BindingResult binding) {
 
