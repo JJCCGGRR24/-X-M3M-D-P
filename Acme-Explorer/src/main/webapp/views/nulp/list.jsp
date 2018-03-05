@@ -82,9 +82,11 @@
 			<spring:url value="/nulp/manager/edit.do" var="editURL">
 		      <spring:param name="nulpId" value="${row.id}"></spring:param>
 	      </spring:url>
+	      
 	      <a href="${editURL}"> <spring:message code="nulp.edit" /></a>
+	     
  		  </display:column> 
-	     </jstl:if>
+	      </jstl:if>
 	   
 	 </security:authorize>
 

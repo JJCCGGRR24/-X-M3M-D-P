@@ -57,6 +57,8 @@ public class ManagerNulpController {
 
 		res.addObject("nulps", nulps);
 		res.addObject("requestURI", "nulp/manager/list.do");
+		final Date actual = new Date();
+		res.addObject("actual", actual);
 
 		return res;
 	}
@@ -144,6 +146,8 @@ public class ManagerNulpController {
 		result.addObject("nulp", nulp);
 		result.addObject("message", messageCode);
 		result.addObject("requestURI", "nulp/manager/edit.do");
+		final Date actual = new Date();
+		result.addObject("actual", actual);
 		return result;
 	}
 

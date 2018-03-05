@@ -52,6 +52,7 @@ public class ActorNulpController {
 
 		res.addObject("nulps", nulps);
 		res.addObject("requestURI", "nulp/actor/list.do");
+
 		return res;
 	}
 }
