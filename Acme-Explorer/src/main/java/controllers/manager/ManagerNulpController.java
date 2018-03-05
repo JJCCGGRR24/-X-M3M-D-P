@@ -72,12 +72,13 @@ public class ManagerNulpController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int nulpId) {
 
-		final ModelAndView result;
-
+		ModelAndView result;
 		final Nulp nulp = this.nulpService.findOne(nulpId);
-		final Manager actual = (Manager) this.loginService.getPrincipalActor();
-		Assert.isTrue(nulp.getTrip().getManager() == actual);
+		final Manager actualActor = (Manager) this.loginService.getPrincipalActor();
+		Assert.isTrue(nulp.getTrip().getManager() == actualActor);
 		Assert.notNull(nulp);
+		final Date actualDate = new Date();
+		Assert.isTrue(nulp.getId() != 0 && nulp.getMoment().after(actualDate), "can't edit a nulp if this past");
 		result = this.createEditModelAndView(nulp);
 		return result;
 	}
@@ -93,8 +94,7 @@ public class ManagerNulpController {
 			result = this.createEditModelAndView(nulp);
 		else
 			try {
-				if (nulp.getMoment() == null)
-					nulp.setMoment(new Date());
+
 				this.nulpService.save(nulp);
 				this.tripService.save(nulp.getTrip());
 				result = new ModelAndView("redirect:/nulp/manager/list.do");

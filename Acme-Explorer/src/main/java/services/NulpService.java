@@ -51,7 +51,12 @@ public class NulpService {
 		Assert.notNull(nulp);
 		Assert.isTrue(this.checkPrincipal(nulp));
 		final Date actual = new Date();
-		Assert.isTrue(nulp.getMoment().after(actual), "moment can't be past");
+
+		//Aqui para que si es nulo le ponga la actual y si no es nulo que no pueda ser pasado
+		if (nulp.getMoment() == null)
+			nulp.setMoment(new Date());
+		else
+			Assert.isTrue(nulp.getMoment().after(actual), "moment can't be past");
 		return this.nulpRepository.save(nulp);
 	}
 
@@ -129,7 +134,8 @@ public class NulpService {
 	}
 
 	public Collection<Nulp> getNulpsVisibles(final int tripId) {
-		return this.nulpRepository.getNulpsVisibles(tripId);
+		final Date actual = new Date();
+		return this.nulpRepository.getNulpsVisibles(tripId, actual);
 	}
 
 	public Double querieA() {

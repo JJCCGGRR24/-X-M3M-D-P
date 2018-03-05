@@ -2,6 +2,7 @@
 package repositories;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,7 +21,7 @@ public interface NulpRepository extends JpaRepository<Nulp, Integer> {
 	@Query("select t.manager from Trip t where t.nulps.size = (select max(tt.nulps.size) from Trip tt)")
 	List<Manager> querieB();
 
-	@Query("select n from Nulp n where n.trip.id = ?1 and n.moment < CURRENT_DATE")
-	Collection<Nulp> getNulpsVisibles(int tripId);
+	@Query("select n from Nulp n where n.trip.id = ?1 and n.moment < ?2")
+	Collection<Nulp> getNulpsVisibles(int tripId, Date date);
 
 }
