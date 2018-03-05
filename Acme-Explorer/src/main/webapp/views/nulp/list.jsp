@@ -78,15 +78,16 @@
 	   
 	     <jstl:if test="${row.trip.manager.userAccount.username eq username}">	
 	 	  <display:column title="${editHeader}">
+	 	  <jstl:if test="${row.moment == actual}">
 	      <spring:message code="trip.edit" var="editHeader" />
 			<spring:url value="/nulp/manager/edit.do" var="editURL">
 		      <spring:param name="nulpId" value="${row.id}"></spring:param>
 	      </spring:url>
 	      
 	      <a href="${editURL}"> <spring:message code="nulp.edit" /></a>
-	     
- 		  </display:column> 
 	      </jstl:if>
+ 		  </display:column> 
+	     </jstl:if>
 	   
 	 </security:authorize>
 

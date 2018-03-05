@@ -13,6 +13,7 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,6 +30,7 @@ public class Nulp extends DomainEntity {
 	private String	description;
 
 
+	@Length(max = 100)
 	@NotBlank
 	public String getShortTitle() {
 		return this.shortTitle;
@@ -37,6 +39,7 @@ public class Nulp extends DomainEntity {
 	public void setShortTitle(final String shortTitle) {
 		this.shortTitle = shortTitle;
 	}
+	@Length(max = 250)
 	@NotBlank
 	public String getDescription() {
 		return this.description;

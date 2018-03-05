@@ -59,7 +59,6 @@ public class NulpService {
 			Assert.isTrue(nulp.getMoment().after(actual), "moment can't be past");
 		return this.nulpRepository.save(nulp);
 	}
-
 	public void delete(final Nulp nulp) {
 		//		Assert.notNull(nulp);
 		//		Assert.isTrue(this.checkPrincipal(nulp));
